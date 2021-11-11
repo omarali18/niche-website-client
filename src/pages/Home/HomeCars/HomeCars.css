@@ -1,0 +1,20 @@
+
+.homecars-body{
+
+    background-color: rgb(238, 238, 238);
+}
+.homeCars-container{
+    width: 70%;
+    margin: 0 auto;
+    padding: 8% 0;
+}
+@media only screen and (max-width:750px) {
+    .homeCars-container{
+        width: 85%;
+    }
+}
+@media only screen and (min-width:751px),( max-width:1366px) {
+    .homeCars-container{
+        width: 90%;
+    }
+}
