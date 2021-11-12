@@ -1,5 +1,8 @@
 .form-container{
     width: 25%;
+    border: 1px solid gray;
+    padding: 3%;
+    box-shadow: 5px 5px 40px gray;
 }
 @media only screen and (max-width:750px) {
     .form-container{

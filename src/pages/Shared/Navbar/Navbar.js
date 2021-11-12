@@ -1,9 +1,12 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
+import useAuth from '../../../Hooks/useAuth';
 import "./Navbar.css"
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
+    const { user, handleLogout } = useAuth()
 
     const handleClick = () => setClick(!click);
     return (
@@ -37,40 +40,36 @@ const Navbar = () => {
                                 SEE MORE CAR
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink
-                                exact
-                                to="/login"
-                                activeClassName="active"
-                                className="nav-links"
-                                onClick={handleClick}
-                            >
-                                Login
-                            </NavLink>
-                        </li>
 
-                        <li className="nav-item">
-                            <NavLink
-                                exact
-                                to="/register"
-                                activeClassName="active"
-                                className="nav-links"
-                                onClick={handleClick}
-                            >
-                                Register
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                exact
-                                to="/contact"
-                                activeClassName="active"
-                                className="nav-links"
-                                onClick={handleClick}
-                            >
-                                Contact Us
-                            </NavLink>
-                        </li>
+                        {
+                            user.email ?
+
+                                <li className="nav-item">
+                                    <NavLink
+                                        exact
+                                        to="/login"
+                                        activeClassName="active"
+                                        className="nav-links"
+                                        onClick={handleClick}
+                                    >
+                                        <Button className="logout-btn" sx={{ color: "white" }} onClick={handleLogout}>logOut</Button>
+                                    </NavLink>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <NavLink
+                                        exact
+                                        to="/login"
+                                        activeClassName="active"
+                                        className="nav-links"
+                                        onClick={handleClick}
+                                    >
+                                        Login
+                                    </NavLink>
+                                </li>
+                        }
+
+
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>
                         <i className={click ? "fas fa-times" : "fas fa-bars"}></i>

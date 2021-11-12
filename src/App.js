@@ -6,32 +6,36 @@ import AllCars from './pages/Home/AllCars/AllCars';
 import Purchase from './pages/Home/Purchase/Purchase';
 import Login from './pages/Login/Login/Login';
 import Register from './pages/Login/Register/Register';
+import AuthProvider from './context/AuthProvider/AuthProvider';
+import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
     <div className="">
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/allcars">
-            <AllCars />
-          </Route>
-          <Route path="/purchase">
-            <Purchase />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/allcars">
+              <AllCars />
+            </Route>
+            <PrivateRoute path="/purchase">
+              <Purchase />
+            </PrivateRoute>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
