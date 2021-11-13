@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import NavBar from "../../Shared/Navbar/Navbar"
 import Footer from "../../Shared/Footer/Footer"
 import "./Purchase.css"
 
 const Purchase = () => {
-
-    const [order, setOrder] = useState({})
-    const [error, setError] = useState("")
+    const [singleCar, setSingleCar] = useState({})
+    const idIs = useParams();
+    const history = useHistory()
 
     const { user } = useAuth()
+    const loginUser = { name: user.displayName, email: user.email }
+
+    const [order, setOrder] = useState(loginUser)
+
 
 
     const handleOnBlur = e => {
@@ -22,16 +26,41 @@ const Purchase = () => {
         newUser[field] = value
         setOrder(newUser)
     }
+    useEffect(() => {
+        fetch(`http://localhost:5000/allcars?id=${idIs.id}`)
+            .then(res => res.json())
+            .then(data => {
+                setSingleCar(data);
+            })
+    }, [idIs])
 
-    console.log(user);
+    // console.log(user);
     const handleOnSubmit = e => {
-        // if (register.password !== register.password2) {
-        //     setError("Password not match..!!")
-        //     return
-        // }
-        // else {
-        //     setError("")
-        // }
+        const date = new Date()
+        const orderDetails = {
+            ...order,
+            carName: singleCar.name,
+            carPrice: singleCar.price,
+            date: date.toLocaleDateString()
+        }
+
+        fetch("http://localhost:5000/order", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(orderDetails)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    alert("Order successfully get.")
+                    history.push("/")
+                };
+            })
+
+
         e.preventDefault()
     }
 
@@ -69,7 +98,7 @@ const Purchase = () => {
                         id="outlined-basic"
                         label="number"
                         name="number"
-                        type="number"
+                        type="text"
                         variant="outlined"
                     />
                     <TextField
@@ -90,21 +119,7 @@ const Purchase = () => {
                         type="text"
                         variant="outlined"
                     />
-                    <Typography style={{ color: 'red' }} variant="caption" display="block" gutterBottom>
-                        {error}
-                    </Typography>
-                    <TextField
-                        sx={{ width: 1 }}
-                        onBlur={handleOnBlur}
-                        id="outlined-basic"
-                        label="password"
-                        name="password"
-                        type="password"
-                        variant="outlined"
-                    />
-                    <Box sx={{ textAlign: "center" }}>
-                        <Link to="/login"><Button sx={{ py: 2, px: 4, my: 3 }}>Already Registered, please log in.</Button></Link>
-                    </Box>
+
                     <Box sx={{ textAlign: "center" }}>
                         <Button sx={{ py: 2, px: 4 }} type="submit" variant="contained">Registation</Button>
                     </Box>

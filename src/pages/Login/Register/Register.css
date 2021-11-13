@@ -6,6 +6,11 @@
 }
 @media only screen and (max-width:750px) {
     .form-container{
-        width:90%;
+        width: 85%;
     }
 }
+/* @media only screen and (min-width:751px),( max-width:920px) {
+    .massege-form{
+        width: 75%;
+    }
+} */

@@ -23,7 +23,7 @@ const Login = () => {
         newUser[field] = value
         setLoginData(newUser)
     }
-    console.log("uesr is", loginData);
+
     const handleOnSubmit = e => {
         loginEmailPassword(loginData.email, loginData.password, redirect, history)
         e.preventDefault()

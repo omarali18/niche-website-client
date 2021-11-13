@@ -12,19 +12,23 @@ const useFirebase = () => {
     const auth = getAuth()
 
     // Registation function
-    const handleRegistetion = (email, Password, name, history) => {
+    const handleRegistetion = (email, password, name, history) => {
         setIsLoading(true)
-        createUserWithEmailAndPassword(auth, email, Password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user
                 setAuthError("")
+                // update user enter name
                 const newUser = { displayName: name, email }
                 setUser(newUser)
+                // save database
+                saveUsers(email, name, "POST", password, history)
+                // update name
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => { })
                     .catch((error) => { });
-                history.push("/")
+                // history.push("/")
             })
             .catch(error => {
                 setAuthError(error.message)
@@ -41,6 +45,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 history.push(location)
+
                 setAuthError("")
             })
             .catch(error => {
@@ -58,6 +63,7 @@ const useFirebase = () => {
             .then(result => {
                 const user = result.user;
                 setAuthError("")
+                saveUsers(user.email, user.displayName, "PUT", user.password, history, location)
                 history.push(location)
 
             })
@@ -89,6 +95,28 @@ const useFirebase = () => {
         })
         return () => unsubscribed;
     }, [])
+
+    // save user in database
+    const saveUsers = (email, displayName, method, Password = "", history, location = "/") => {
+        const user = { email, displayName, Password }
+        fetch("http://localhost:5000/users", {
+            method: method,
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    alert("Registration Successfully..!")
+                    history.push(location)
+                }
+            })
+    }
+
+
 
 
     return {

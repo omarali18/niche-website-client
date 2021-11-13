@@ -40,6 +40,18 @@ const Navbar = () => {
                                 SEE MORE CAR
                             </NavLink>
                         </li>
+                        {user.email && <li className="nav-item">
+                            <NavLink
+                                exact
+                                to="/dashboard"
+                                activeClassName="active"
+                                className="nav-links"
+                                onClick={handleClick}
+                            >
+                                Dashboard
+                            </NavLink>
+                        </li>}
+
 
                         {
                             user.email ?

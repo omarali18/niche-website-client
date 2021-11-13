@@ -9,12 +9,12 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 
 const HomeCar = ({ homeCar }) => {
-    const { img, name, review, price, description } = homeCar
+    const { img, name, review, price, description, _id } = homeCar
 
 
     return (
         <Grid item xs={4} sm={4} md={4} >
-            <Card sx={{ minWidth: 275, border: 0, boxShadow: 0 }}>
+            <Card sx={{ minWidth: 275, border: 0, boxShadow: 0, height: "750px" }}>
                 <CardMedia
                     component="img"
                     alt="green iguana"
@@ -33,7 +33,7 @@ const HomeCar = ({ homeCar }) => {
                         {description}
                     </Typography>
                     <Box sx={{ textAlign: "center", pb: 4 }}>
-                        <Link to="/purchase"><Button variant="contained">Purchase Now</Button></Link>
+                        <Link to={`/purchase/${_id}`}><Button variant="contained">Purchase Now</Button></Link>
                     </Box>
                 </CardContent>
             </Card>
