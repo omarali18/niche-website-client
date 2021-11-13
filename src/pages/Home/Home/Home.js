@@ -1,10 +1,10 @@
 import React from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import Navbar from '../../Shared/Navbar/Navbar';
-import AllCars from '../AllCars/AllCars';
 import Banner from '../Banner/Banner';
 import HomeCars from '../HomeCars/HomeCars';
 import PerfectCar from '../PerfectCar/PerfectCar';
+import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
     return (
@@ -12,10 +12,7 @@ const Home = () => {
             <Navbar />
             <Banner />
             <HomeCars />
-            <h1>htis is home</h1>
-            <h1>htis is home</h1>
-            <h1>htis is home</h1>
-            <h1>htis is home</h1>
+            <Reviews />
             <PerfectCar />
             <Footer />
         </div>

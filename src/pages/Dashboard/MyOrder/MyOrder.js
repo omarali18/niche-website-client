@@ -21,12 +21,7 @@ const MyOrder = ({ myOrder, handleDeleteOrder }) => {
     return (
         <Grid item xs={4} sm={4} md={4} >
             <Card sx={{ minWidth: 275, border: 0, boxShadow: 1 }}>
-                {/* <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    style={{ width: "100%", border: "1px solid gray", margin: "0 auto" }}
-                    image={img}
-                /> */}
+
                 <CardContent sx={{ textAlign: 'left' }}>
                     <Typography variant="h5" component="div">
                         Name: {name}

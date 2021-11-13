@@ -16,7 +16,7 @@ const HomeCars = () => {
                 setDataLoad(false)
                 setHomeCars(data)
             })
-    }, [])
+    }, [limit])
 
     return (
         <div className="homecars-body">

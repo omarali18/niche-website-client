@@ -9,15 +9,15 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 
 const ShowAllCar = ({ AllCar }) => {
-    const { img, name, review, price, description, _id } = AllCar
-    // console.log(AllCar._id);
+    const { img, name, price, description, _id } = AllCar
+
     return (
         <Grid item xs={4} sm={4} md={4} >
             <Card sx={{ minWidth: 275, border: 0, boxShadow: 1, height: "750px" }}>
                 <CardMedia
                     component="img"
                     alt="green iguana"
-                    style={{ width: "100%", border: "1px solid gray", margin: "0 auto" }}
+                    style={{ width: "100%", height: "300px", border: "1px solid gray", margin: "0 auto" }}
                     image={img}
                 />
                 <CardContent>

@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 
 const HomeCar = ({ homeCar }) => {
-    const { img, name, review, price, description, _id } = homeCar
+    const { img, name, price, description, _id } = homeCar
 
 
     return (
@@ -18,7 +18,7 @@ const HomeCar = ({ homeCar }) => {
                 <CardMedia
                     component="img"
                     alt="green iguana"
-                    style={{ width: "100%", margin: "0 auto" }}
+                    style={{ width: "100%", height: "300px", margin: "0 auto" }}
                     image={img}
                 />
                 <CardContent>

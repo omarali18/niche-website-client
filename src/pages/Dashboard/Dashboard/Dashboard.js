@@ -15,12 +15,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { NavLink } from 'react-router-dom';
-import Admin from '../Admin/Admin';
-import Pay from '../Pay/Pay';
+import useAuth from '../../../Hooks/useAuth';
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import AddReview from '../AddReview/AddReview';
 import MyOrders from '../MyOrders/MyOrders';
-
-
+import Payment from '../Payment/Payment';
+import Admin from '../Admin/Admin';
+import AddProduct from '../AddProduct/AddProduct';
+import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 
 const drawerWidth = 240;
 function HomeIcon(props) {
@@ -34,38 +36,91 @@ function HomeIcon(props) {
 const Dashboard = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
+    let { path, url } = useRouteMatch();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    const { handleLogout, admin } = useAuth()
 
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
-            <NavLink to="/home">
+            <Link to="/home">
                 <ListItem button >
                     <ListItemIcon >
                         <HomeIcon />
                     </ListItemIcon>
                     <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Home" />
                 </ListItem>
-            </NavLink>
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </Link>
+            {!admin && <Box>
+                <Link to={`${url}`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Add Review" />
                     </ListItem>
-                ))}
-            </List>
+                </Link>
+
+                <Link to={`${url}/myOrder`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="My Order" />
+                    </ListItem>
+                </Link>
+
+                <Link to={`${url}/payment`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Pay Now" />
+                    </ListItem>
+                </Link>
+            </Box>}
+            {admin && <Box>
+                <Link to={`${url}/admin`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Create Admin" />
+                    </ListItem>
+                </Link>
+
+                <Link to={`${url}/addProduct`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Add Product" />
+                    </ListItem>
+                </Link>
+            </Box>}
+
+            <Link onClick={handleLogout} to="/login">
+                <ListItem button >
+                    <ListItemIcon >
+                        <i className="fas fa-sign-out-alt"></i>
+                    </ListItemIcon>
+                    <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="logout" />
+                </ListItem>
+            </Link>
+
+
+
+
 
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -96,14 +151,14 @@ const Dashboard = (props) => {
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
             >
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+
                 <Drawer
                     container={container}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
+                        keepMounted: true,
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
@@ -128,9 +183,24 @@ const Dashboard = (props) => {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Pay />
-                <MyOrders />
-                <Admin />
+                <Switch>
+                    <Route exact path={path}>
+                        <AddReview />
+                    </Route>
+                    <Route path={`${path}/myorder`}>
+                        <MyOrders></MyOrders>
+                    </Route>
+                    <Route path={`${path}/payment`}>
+                        <Payment></Payment>
+                    </Route>
+                    <AdminRoute path={`${path}/admin`}>
+                        <Admin />
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addProduct`}>
+                        <AddProduct />
+                    </AdminRoute>
+                </Switch>
+
 
             </Box>
         </Box>

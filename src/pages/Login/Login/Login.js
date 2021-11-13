@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import NavBar from "../../Shared/Navbar/Navbar"
-import useFirebase from '../../../Hooks/useFirebase';
 import useAuth from '../../../Hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({})
-    const [error, setError] = useState("")
     const { loginByGoogle, loginEmailPassword } = useAuth()
 
     const location = useLocation()
@@ -49,9 +47,7 @@ const Login = () => {
                         type="email"
                         variant="outlined"
                     />
-                    <Typography style={{ color: 'red' }} variant="caption" display="block" gutterBottom>
-                        {error}
-                    </Typography>
+
                     <TextField
                         sx={{ width: 1 }}
                         onBlur={handleOnBlur}

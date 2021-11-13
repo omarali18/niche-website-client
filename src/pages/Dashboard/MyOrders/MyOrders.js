@@ -17,11 +17,9 @@ const MyOrders = () => {
                 setDataLoad(false)
                 setMyAllOrders(data);
             })
-    }, [])
+    }, [user.email])
 
     const handleDeleteOrder = (id, confirm) => {
-        console.log("delete this -----", id);
-        console.log("nai nai nai-----", confirm);
         if (confirm) {
             fetch(`http://localhost:5000/order?id=${id}`, {
                 method: "DELETE"
@@ -35,16 +33,7 @@ const MyOrders = () => {
                     }
                 })
         }
-        // fetch(`http://localhost:5000/order?id=${id}`, {
-        //     method: "DELETE"
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.acknowledged) {
-        //             alert("Delete successfully.")
-        //         }
-        //     })
+
     }
 
     return (

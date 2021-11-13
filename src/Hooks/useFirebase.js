@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({})
     const [authError, setAuthError] = useState("")
     const [isLoading, setIsLoading] = useState(true)
+    const [admin, setAdmin] = useState(false)
 
     const auth = getAuth()
 
@@ -16,7 +17,7 @@ const useFirebase = () => {
         setIsLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
-                const user = result.user
+                // const user = result.user
                 setAuthError("")
                 // update user enter name
                 const newUser = { displayName: name, email }
@@ -40,7 +41,6 @@ const useFirebase = () => {
     // console.log('redister', user);
     // Login email password function
     const loginEmailPassword = (email, password, location, history) => {
-        console.log(email, password, "errors");
         setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
@@ -94,7 +94,16 @@ const useFirebase = () => {
             setIsLoading(false)
         })
         return () => unsubscribed;
-    }, [])
+    }, [auth])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setAdmin(data.admin)
+            })
+    }, [user.email])
 
     // save user in database
     const saveUsers = (email, displayName, method, Password = "", history, location = "/") => {
@@ -121,6 +130,7 @@ const useFirebase = () => {
 
     return {
         user,
+        admin,
         authError,
         isLoading,
         handleRegistetion,

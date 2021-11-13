@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 
-const Pay = () => {
+const Payment = () => {
     return (
         <Box sx={{ textAlign: "center", color: "red" }}>
             <Typography variant="h4">
@@ -12,4 +12,4 @@ const Pay = () => {
     );
 };
 
-export default Pay;
+export default Payment;

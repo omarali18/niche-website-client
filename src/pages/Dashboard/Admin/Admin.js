@@ -5,25 +5,26 @@ import admin from "../../../images/admin.jpg"
 import { Button, TextField, Typography } from '@mui/material';
 
 const Admin = () => {
-    const [createAdmin, setCreateAdmin] = useState({})
+    const [createAdmin, setCreateAdmin] = useState("")
     const handleOnBlur = e => {
         setCreateAdmin(e.target.value)
     }
 
     const handleOnSubmit = e => {
 
-        console.log(createAdmin);
-        // fetch("http://localhost:5000/order", {
-        //     method: "POST",
-        //     headers: {
-        //         "content-type": "application/json"
-        //     },
-        //     body: JSON.stringify(orderDetails)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     })
+        const user = { email: createAdmin }
+        console.log("admin", user);
+        fetch("http://localhost:5000/users/admin", {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
 
 
         e.preventDefault()
@@ -36,7 +37,7 @@ const Admin = () => {
                     <img src={admin} alt="" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
-                    <Box sx={{ textAlign: "center", mt: 7 }}>
+                    <Box sx={{ textAlign: "center", mt: 20 }}>
                         <Typography variant="h3">
                             Create an Admin
                         </Typography>
