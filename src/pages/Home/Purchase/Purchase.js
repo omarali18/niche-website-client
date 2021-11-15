@@ -34,7 +34,7 @@ const Purchase = () => {
             })
     }, [idIs])
 
-    // console.log(user);
+
     const handleOnSubmit = e => {
         const date = new Date()
         const orderDetails = {
@@ -53,7 +53,6 @@ const Purchase = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.insertedId) {
                     alert("Order successfully get.")
                     history.push("/")
@@ -121,7 +120,7 @@ const Purchase = () => {
                     />
 
                     <Box sx={{ textAlign: "center" }}>
-                        <Button sx={{ py: 2, px: 4 }} type="submit" variant="contained">Registation</Button>
+                        <Button sx={{ py: 2, px: 4 }} type="submit" variant="contained">Place Order</Button>
                     </Box>
                 </form>
             </Box>

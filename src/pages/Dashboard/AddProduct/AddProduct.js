@@ -14,7 +14,6 @@ const AddProduct = () => {
     }
 
     const handleOnSubmit = e => {
-        console.log(newProduct);
         fetch("https://blooming-sierra-49140.herokuapp.com/allcars", {
             method: "POST",
             headers: {
@@ -67,14 +66,12 @@ const AddProduct = () => {
                     sx={{ width: 1 }}
                     onBlur={handleOnBlur}
                     id="outlined-basic"
-                    label="imagae"
+                    label="Add a image url from googel"
                     name="img"
                     type="text"
                     variant="outlined"
                 />
-                {/* <Box sx={{ textAlign: "center" }}>
-                <Link to="/login"><Button sx={{ py: 2, px: 4, my: 3 }}>Already Registered, please log in.</Button></Link>
-            </Box> */}
+
                 <Box sx={{ textAlign: "center", mt: 3 }}>
                     <Button sx={{ py: 2, px: 4 }} type="submit" variant="contained">Submit</Button>
                 </Box>

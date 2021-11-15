@@ -26,7 +26,6 @@ const MyOrders = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     if (data.acknowledged) {
                         alert("Delete successfully.")
                         window.location.reload()

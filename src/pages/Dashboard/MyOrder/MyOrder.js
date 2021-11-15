@@ -13,11 +13,7 @@ const MyOrder = ({ myOrder, handleDeleteOrder }) => {
     const handleOpen = () => setOpenModal(true);
     const handleClose = () => setOpenModal(false);
 
-    // console.log(myOrder);
-    // const handleDeleteOrder = (id) => {
-    //     console.log(id);
-    // fetch("")
-    // }
+
     return (
         <Grid item xs={4} sm={4} md={4} >
             <Card sx={{ minWidth: 275, border: 0, boxShadow: 1 }}>

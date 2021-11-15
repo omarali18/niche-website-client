@@ -15,7 +15,6 @@ const Admin = () => {
     const handleOnSubmit = e => {
 
         const user = { email: createAdmin }
-        console.log("admin", user);
         fetch("https://blooming-sierra-49140.herokuapp.com/users/admin", {
             method: "PUT",
             headers: {
@@ -25,7 +24,6 @@ const Admin = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.matchedCount) {
                     setSuccess(true)
                 }

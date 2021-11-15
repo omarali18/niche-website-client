@@ -89,20 +89,16 @@ const useFirebase = () => {
 
     useEffect(() => {
         let emailIs = user.email;
-        console.log("email is", emailIs);
         if (emailIs) {
-            console.log("if if if email is", emailIs);
 
             fetch(`https://blooming-sierra-49140.herokuapp.com/users/${emailIs}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log("ADMIN IS", data.admin);
                     setAdmin(data.admin)
                 })
         }
 
     }, [user.email])
-    console.log("aaaaaaaaaaaaaaadminnnnnnnn", admin);
 
     // SignOut function
     const handleLogout = () => {

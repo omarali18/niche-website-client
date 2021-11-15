@@ -74,7 +74,7 @@ const Footer = () => {
 
                                 <input
                                     className="input-field"
-                                    defaultValue="Your Email111"
+                                    defaultValue="Your Email"
                                     {...register("exampleRequired")} /> <br />
 
                                 <textarea
