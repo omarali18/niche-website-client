@@ -15,7 +15,7 @@ const AddProduct = () => {
 
     const handleOnSubmit = e => {
         console.log(newProduct);
-        fetch("http://localhost:5000/allcars", {
+        fetch("https://blooming-sierra-49140.herokuapp.com/allcars", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -8,10 +8,6 @@ const AddReview = () => {
     const [reviews, setReview] = useState("")
     const { user } = useAuth()
     const handleOnBlur = e => {
-        // const field = e.target.name
-        // const value = e.target.value
-        // const reviewIs = {}
-        // reviewIs[field] = value
         setReview(e.target.value)
     }
 
@@ -19,7 +15,7 @@ const AddReview = () => {
     const handleOnSubmit = e => {
         const newReviews = { name: user.displayName, email: user.email, reviews }
 
-        fetch("http://localhost:5000/review", {
+        fetch("https://blooming-sierra-49140.herokuapp.com/review", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

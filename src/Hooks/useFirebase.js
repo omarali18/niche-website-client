@@ -73,15 +73,6 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false))
     };
 
-    // SignOut function
-    const handleLogout = () => {
-        signOut(auth)
-            .then(() => {
-                setUser({})
-            })
-            .catch(error => { })
-    }
-
     // observe user state
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
@@ -94,21 +85,39 @@ const useFirebase = () => {
             setIsLoading(false)
         })
         return () => unsubscribed;
-    }, [auth])
+    }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setAdmin(data.admin)
-            })
+        let emailIs = user.email;
+        console.log("email is", emailIs);
+        if (emailIs) {
+            console.log("if if if email is", emailIs);
+
+            fetch(`https://blooming-sierra-49140.herokuapp.com/users/${emailIs}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log("ADMIN IS", data.admin);
+                    setAdmin(data.admin)
+                })
+        }
+
     }, [user.email])
+    console.log("aaaaaaaaaaaaaaadminnnnnnnn", admin);
+
+    // SignOut function
+    const handleLogout = () => {
+        setIsLoading(true)
+        signOut(auth)
+            .then(() => {
+            })
+            .catch(error => { })
+            .finally(() => setIsLoading(false))
+    }
 
     // save user in database
     const saveUsers = (email, displayName, method, Password = "", history, location = "/") => {
         const user = { email, displayName, Password }
-        fetch("http://localhost:5000/users", {
+        fetch("https://blooming-sierra-49140.herokuapp.com/users", {
             method: method,
             headers: {
                 "content-type": "application/json"
@@ -117,7 +126,6 @@ const useFirebase = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.acknowledged) {
                     alert("Registration Successfully..!")
                     history.push(location)

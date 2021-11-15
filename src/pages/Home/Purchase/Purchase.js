@@ -27,7 +27,7 @@ const Purchase = () => {
         setOrder(newUser)
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/allcars?id=${idIs.id}`)
+        fetch(`https://blooming-sierra-49140.herokuapp.com/allcars?id=${idIs.id}`)
             .then(res => res.json())
             .then(data => {
                 setSingleCar(data);
@@ -44,7 +44,7 @@ const Purchase = () => {
             date: date.toLocaleDateString()
         }
 
-        fetch("http://localhost:5000/order", {
+        fetch("https://blooming-sierra-49140.herokuapp.com/order", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

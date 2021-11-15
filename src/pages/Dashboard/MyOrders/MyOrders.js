@@ -11,7 +11,7 @@ const MyOrders = () => {
 
     const { user } = useAuth()
     useEffect(() => {
-        fetch(`http://localhost:5000/order?myOrder=${user.email}`)
+        fetch(`https://blooming-sierra-49140.herokuapp.com/order?myOrder=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setDataLoad(false)
@@ -21,7 +21,7 @@ const MyOrders = () => {
 
     const handleDeleteOrder = (id, confirm) => {
         if (confirm) {
-            fetch(`http://localhost:5000/order?id=${id}`, {
+            fetch(`https://blooming-sierra-49140.herokuapp.com/order?id=${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

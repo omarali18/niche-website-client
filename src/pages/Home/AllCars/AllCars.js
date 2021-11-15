@@ -10,7 +10,7 @@ const AllCars = () => {
     const [dataLoad, setDataLoad] = useState(true)
     const [allCars, setAllCars] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/allcars")
+        fetch("https://blooming-sierra-49140.herokuapp.com/allcars")
             .then(res => res.json())
             .then(data => {
                 setDataLoad(false)

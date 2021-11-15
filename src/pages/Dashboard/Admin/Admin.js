@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import admin from "../../../images/admin.jpg"
-import { Button, TextField, Typography } from '@mui/material';
+import { Alert, Button, TextField, Typography } from '@mui/material';
 
 const Admin = () => {
     const [createAdmin, setCreateAdmin] = useState("")
+    const [success, setSuccess] = useState(false)
+
     const handleOnBlur = e => {
         setCreateAdmin(e.target.value)
     }
@@ -14,7 +16,7 @@ const Admin = () => {
 
         const user = { email: createAdmin }
         console.log("admin", user);
-        fetch("http://localhost:5000/users/admin", {
+        fetch("https://blooming-sierra-49140.herokuapp.com/users/admin", {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -24,6 +26,9 @@ const Admin = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                if (data.matchedCount) {
+                    setSuccess(true)
+                }
             })
 
 
@@ -42,6 +47,7 @@ const Admin = () => {
                             Create an Admin
                         </Typography>
                     </Box>
+                    {success && <Alert severity="success">successfully created admin.</Alert>}
                     <form onSubmit={handleOnSubmit}>
                         <TextField
                             sx={{ width: 1, my: 2 }}

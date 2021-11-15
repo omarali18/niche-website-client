@@ -10,7 +10,7 @@ const HomeCars = () => {
     const [dataLoad, setDataLoad] = useState(true)
     let limit = 6
     useEffect(() => {
-        fetch(`http://localhost:5000/allcars?datalimit=${limit}`)
+        fetch(`https://blooming-sierra-49140.herokuapp.com/allcars?datalimit=${limit}`)
             .then(res => res.json())
             .then(data => {
                 setDataLoad(false)
