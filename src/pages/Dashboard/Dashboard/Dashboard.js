@@ -23,6 +23,7 @@ import Payment from '../Payment/Payment';
 import Admin from '../Admin/Admin';
 import AddProduct from '../AddProduct/AddProduct';
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import MenegeReviews from '../MenegeReviews/MenegeReviews';
 
 const drawerWidth = 240;
 function HomeIcon(props) {
@@ -99,6 +100,14 @@ const Dashboard = (props) => {
 
                         </ListItemIcon>
                         <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Add Product" />
+                    </ListItem>
+                </Link>
+                <Link to={`${url}/menegeReview`}>
+                    <ListItem button >
+                        <ListItemIcon >
+
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "rgb(47, 47, 47)" }} primary="Menege Review" />
                     </ListItem>
                 </Link>
             </Box>}
@@ -198,6 +207,9 @@ const Dashboard = (props) => {
                     </AdminRoute>
                     <AdminRoute path={`${path}/addProduct`}>
                         <AddProduct />
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/menegeReview`}>
+                        <MenegeReviews />
                     </AdminRoute>
                 </Switch>
 

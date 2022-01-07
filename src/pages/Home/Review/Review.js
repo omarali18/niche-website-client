@@ -14,7 +14,7 @@ const Review = ({ review }) => {
                         by {name} <span style={{color:'green', marginLeft:'10px'}}><i className="fas fa-clipboard-check"></i> Verified Purchase</span>
                     </Typography>
 
-                    <Typography variant="h6" sx={{ my: 5 }}>
+                    <Typography variant="subtitle1" sx={{ my: 5 }}>
                         {reviews}
                     </Typography>
 

@@ -27,7 +27,6 @@ const AddReview = () => {
     const handleOnBlur = e => {
         setReview(e.target.value)
     }
-    console.log("rrrr", rating);
 
 
     const handleOnSubmit = e => {
