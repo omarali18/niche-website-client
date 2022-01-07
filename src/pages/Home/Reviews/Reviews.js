@@ -21,7 +21,7 @@ const Reviews = () => {
                     See our Reviews
                 </Typography>
                 {
-                    dataLoad ? <Box sx={{ textAlign: "center", mt: 10 }}><CircularProgress /></Box> : <div className="homeCars-container">
+                    dataLoad ? <Box sx={{ textAlign: "center", mt: 10 }}><CircularProgress /></Box> : <Box sx={{width:{md:'75%'},mx:"auto",mb:{md:15}}}>
 
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                             {
@@ -32,7 +32,7 @@ const Reviews = () => {
                             }
                         </Grid>
 
-                    </div>
+                    </Box>
                 }
             </Box>
             <hr style={{ width: "60%", margin: "0 auto", color: "gray" }} className="review-hr" />

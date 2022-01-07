@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, Rating, TextField, Typography } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 import "./AddReview.css"
 import useAuth from '../../../Hooks/useAuth';
 
+
+// const labels = {
+//     0.5: 'Useless',
+//     1: 'Useless+',
+//     1.5: 'Poor',
+//     2: 'Poor+',
+//     2.5: 'Ok',
+//     3: 'Ok+',
+//     3.5: 'Good',
+//     4: 'Good+',
+//     4.5: 'Excellent',
+//     5: 'Excellent+',
+//   };
+
 const AddReview = () => {
     const [reviews, setReview] = useState("")
+    const [rating, setRating] = useState(2);
+    const [hover, setHover] = useState(-1);
     const { user } = useAuth()
     const handleOnBlur = e => {
         setReview(e.target.value)
     }
+    console.log("rrrr", rating);
 
 
     const handleOnSubmit = e => {
-        const newReviews = { name: user.displayName, email: user.email, reviews }
+        const newReviews = { name: user.displayName, email: user.email, reviews,rating }
 
         fetch("https://blooming-sierra-49140.herokuapp.com/review", {
             method: "POST",
@@ -48,6 +66,18 @@ const AddReview = () => {
                         type="text"
                         variant="outlined"
                     />
+                    <Box sx={{textAlign:"center",my:3}}>
+                        <Typography component="legend">Give a ster Rationg</Typography>
+                       
+                            <Rating
+                                name="hover-feedback"
+                                value={rating}
+                                precision={0.5}
+                                onChange={(event, newValue) => {
+                                    setRating(newValue);
+                                }}
+                            />
+                    </Box>
                     <Box sx={{ textAlign: "center" }}>
                         <Button sx={{ py: 2, px: 4 }} type="submit" variant="contained">Submit</Button>
                     </Box>
