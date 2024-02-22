@@ -9,6 +9,7 @@ const Navbar = () => {
     const { user, handleLogout } = useAuth()
 
     const handleClick = () => setClick(!click);
+    console.log("click", click);
     return (
         <>
             <nav className="navbar">
@@ -22,7 +23,7 @@ const Navbar = () => {
                             <NavLink
                                 exact
                                 to="/"
-                                activeClassName="active"
+                                // activeClassName="active"
                                 className="nav-links"
                                 onClick={handleClick}
                             >
